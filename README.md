@@ -5,4 +5,4 @@
 
 故设置了number = num - 3
 
-没写if __name__ == '__main__'
+没写if __name__ == '__main__',自行设置user-agent
