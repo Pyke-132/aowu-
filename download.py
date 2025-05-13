@@ -129,7 +129,7 @@ for num in number_list:
     url1 = rf"https://www.aowu.tv/play/ZuQCCS-1-{number}.html"
     # 设置请求headers
     headers = {
-        "user-agent": r"Mozilla/5.0", "referer": rf"https://www.aowu.tv/play/ZuQCCS-1-{num}.html"
+        "user-agent": , "referer": rf"https://www.aowu.tv/play/ZuQCCS-1-{num}.html"
     }
     # 尝试执行
     script_string = tries()
