@@ -11,6 +11,8 @@ import functools
 # 接受输入
 number = input("请输入要下载的集数：")
 number_list = number.split(",")
+# 设置保存地址
+path = rf"E:\视频\python下载\海贼王{num}.mp4"
 
 # 正则一：匹配player_aaaa：
 pattern = re.compile(r"player_aaaa=\{.+}")
@@ -20,16 +22,8 @@ pattern_2 = re.compile("\"url_next\":\".*?\"")
 # 正则匹配最终url
 prog_first = re.compile(r"container.*\n.*\n.*theme:.*")
 prog_second = re.compile(r"'http.*'")
-# 装饰器，标记函数执行
-# def decorator(func):
-#     @functools.wraps(func)
-#     def wrapper(*args, **kwargs):
-#         print(f"{func.__name__} is working")
-#         return func(*args, **kwargs),print(f"{func.__name__} finishes working\n")
-#     return wrapper
 
 # 一轮处理request+Beautifulsoup，查找scripts标签
-# @decorator
 def find_scrips(url, pattern):
     res = requests.get(url)
     soup = BeautifulSoup(res.content, "html.parser")
@@ -38,7 +32,6 @@ def find_scrips(url, pattern):
     return scripts
 
 # @decorator
-# 正则匹配url函数
 def re_url(pattern_1,pattern_2,scripts):
     url = re.search(pattern_1, scripts[0]).group()[7:-1]
     url_next = re.search(pattern_2, scripts[0]).group()[12:-1]
@@ -89,7 +82,7 @@ def BS_analysis(res):
 
 # download函数
 def download(num,response):
-    with open(rf"E:\视频\python下载\海贼王{num}.mp4", 'wb') as file:
+    with open(path, 'wb') as file:
         print(f"正在下载海贼王第{num}集")
         # 使用iter_content方法逐块读取响应内容
         for chunk in response.iter_content(chunk_size=8192):  # 设置块大小为8192字节
